@@ -1,0 +1,73 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Online Booking</title>
+  <link rel="stylesheet" href="onlinebooking.css" />
+</head>
+<body>
+  <section class="booking-form">
+    <h1>Online Booking</h1>
+    <form id="bookingForm">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" required>
+
+      <label for="from">From</label>
+      <input type="text" id="from" required>
+
+      <label for="to">To</label>
+      <input type="text" id="to" required>
+
+      <label for="date">Travel Date</label>
+      <input type="date" id="date" required>
+
+      <label for="mode">Mode</label>
+      <select id="mode" required>
+        <option value="">Select Mode</option>
+        <option value="Flight">Flight</option>
+        <option value="Train">Train</option>
+        <option value="Bus">Bus</option>
+      </select>
+
+      <button type="submit">Book Now</button>
+    </form>
+
+    <div id="confirmation" class="confirmation"></div>
+  </section>
+
+  <script>
+    document.getElementById("bookingForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const from = document.getElementById("from").value;
+      const to = document.getElementById("to").value;
+      const date = document.getElementById("date").value;
+      const mode = document.getElementById("mode").value;
+
+      if (!mode) {
+        alert("Please select a mode of travel.");
+        return;
+      }
+
+      const confirmationDiv = document.getElementById("confirmation");
+      confirmationDiv.innerHTML = `
+        <h2>Booking Confirmed!</h2>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>From:</strong> ${from}</p>
+        <p><strong>To:</strong> ${to}</p>
+        <p><strong>Date:</strong> ${new Date(date).toDateString()}</p>
+        <p><strong>Mode:</strong> ${mode}</p>
+      `;
+
+      document.getElementById("bookingForm").reset();
+    });
+  </script>
+</body>
+</html>
